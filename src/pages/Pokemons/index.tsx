@@ -34,14 +34,18 @@ export function Pokemons({ ...rest }) {
   }
 
   function getPokemons() {
-    const endpoints = [] as any;
-    for (let i = 1; i <= 1008; i++) {
-      endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}`);
-    }
+    try {
+      const endpoints = [] as any;
+      for (let i = 1; i <= 1008; i++) {
+        endpoints.push(`https://pokeapi.co/api/v2/pokemon/${i}`);
+      }
 
-    axios
-      .all(endpoints.map((endpoint: any) => axios.get(endpoint)))
-      .then((res) => setData(res));
+      axios
+        .all(endpoints.map((endpoint: any) => axios.get(endpoint)))
+        .then((res) => setData(res));
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
